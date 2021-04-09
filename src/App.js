@@ -25,12 +25,15 @@ class App extends Component {
   searchUsers = async searchTerm => {
     this.setState({ loading: true });
 
-    const res = await axios.get(`https://api.github.com/search/users?q=${searchTerm}&client_id=${process.env.REACT_APP_GITHUB_CLIENT_ID}&client_secret=${process.env.REACT_APP_GITHUB_CLIENT_SECRET}`);
+    try {
+      const res = await axios.get(`https://api.github.com/search/users?q=${searchTerm}&client_id=${process.env.REACT_APP_GITHUB_CLIENT_ID}&client_secret=${process.env.REACT_APP_GITHUB_CLIENT_SECRET}`);
 
-    this.setState({
-      users: res.data.items,
-      loading: false
-    });
+      this.setState({ users: res.data.items });
+    } catch (e) {
+      alert(e.response.data.message);
+    } finally {
+      this.setState({ loading: false });
+    }
   }
 
   clearUsers = (e) => {
