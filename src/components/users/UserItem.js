@@ -11,8 +11,8 @@ const UserItem = ({ user: { login, avatar_url, html_url } }) => {
           <h3 className="card-text">{login}</h3>
         </div>
 
-        <div className="card-footer">
-            <a href={html_url} className="btn btn-success d-block my-2" target="_blank" rel="noreferrer">View Profile</a>
+        <div className="card-footer bg-light">
+            <a href={html_url} className="btn btn-success btn-block my-2" target="_blank" rel="noreferrer">Visit Profile</a>
         </div>
       </div>
     </div>
