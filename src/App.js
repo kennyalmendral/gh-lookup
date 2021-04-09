@@ -33,12 +33,23 @@ class App extends Component {
     });
   }
 
+  clearUsers = (e) => {
+    e.preventDefault();
+
+    this.setState({
+      users: [],
+      loading: false
+    });
+  }
+
   render() {
+    const { users, loading } = this.state;
+
     return (
       <div className="App">
         <Navbar />
-        <Search searchUsers={this.searchUsers} />
-        <Users loading={this.state.loading} users={this.state.users} />
+        <Search searchUsers={this.searchUsers} clearUsers={this.clearUsers} showClearBtn={users.length > 0 ? true : false } />
+        <Users loading={loading} users={users} />
       </div>
     );
   }
