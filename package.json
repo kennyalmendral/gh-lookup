@@ -1,5 +1,5 @@
 {
-  "name": "react-github-finder",
+  "name": "github-lookup",
   "version": "0.1.0",
   "private": true,
   "dependencies": {

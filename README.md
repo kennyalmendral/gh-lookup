@@ -1,4 +1,4 @@
-# React GitHub Finder
+# GitHub Lookup
 
 ## Getting Started with Create React App
 
