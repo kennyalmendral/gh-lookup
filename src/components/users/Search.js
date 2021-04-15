@@ -10,7 +10,8 @@ class Search extends Component {
   static propTypes = {
     searchUsers: PropTypes.func.isRequired,
     clearUsers: PropTypes.func.isRequired,
-    showClearBtn: PropTypes.bool.isRequired
+    showClearBtn: PropTypes.bool.isRequired,
+    setAlert: PropTypes.func.isRequired
   };
 
   onChange = e => this.setState({ [e.target.name]: e.target.value });
@@ -20,12 +21,21 @@ class Search extends Component {
 
     this.setState({ is_searching: true });
 
-    this.props.searchUsers(this.state.search_term).finally(() => {
+    if (this.state.search_term === '') {
+      this.props.setAlert('Please enter a search term', 'danger');
+
       this.setState({
         search_term: '',
         is_searching: false
       });
-    });
+    } else {
+      this.props.searchUsers(this.state.search_term).finally(() => {
+        this.setState({
+          search_term: '',
+          is_searching: false
+        });
+      });
+    }
   }
 
   render() {
