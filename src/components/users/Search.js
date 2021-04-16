@@ -1,81 +1,70 @@
-import React, { Component, Fragment } from 'react';
+import React, { Fragment, useState } from 'react';
 import PropTypes from 'prop-types';
 
-class Search extends Component {
-  state = {
-    search_term: '',
-    is_searching: false
-  };
+const Search = ({ searchUsers, clearUsers, showClearBtn, setAlert }) => {
+  const [searchTerm, setSearchTerm] = useState('');
+  const [isSearching, setIsSearching] = useState(false);
 
-  static propTypes = {
-    searchUsers: PropTypes.func.isRequired,
-    clearUsers: PropTypes.func.isRequired,
-    showClearBtn: PropTypes.bool.isRequired,
-    setAlert: PropTypes.func.isRequired
-  };
+  const onChange = e => setSearchTerm(e.target.value);
 
-  onChange = e => this.setState({ [e.target.name]: e.target.value });
-
-  onSubmit = e => {
+  const onSubmit = e => {
     e.preventDefault();
 
-    this.setState({ is_searching: true });
+    setIsSearching(true);
 
-    if (this.state.search_term === '') {
-      this.props.setAlert('Please enter a search term', 'danger');
+    if (searchTerm === '') {
+      setAlert('Please enter a search term', 'danger');
 
-      this.setState({
-        search_term: '',
-        is_searching: false
-      });
+      setSearchTerm('');
+      setIsSearching(false);
     } else {
-      this.props.searchUsers(this.state.search_term).finally(() => {
-        this.setState({
-          search_term: '',
-          is_searching: false
-        });
+      searchUsers(searchTerm).finally(() => {
+        setSearchTerm('');
+        setIsSearching(false);
       });
     }
   }
 
-  render() {
-    const { clearUsers, showClearBtn } = this.props;
-    const { search_term, is_searching } = this.state;
+  return (
+    <div className="py-5 bg-light shadow-sm">
+      <div className="container">
+        <form onSubmit={onSubmit} className="row">
+          <div className="col-12 col-md-8">
+            <input type="text" className="form-control form-control-lg" placeholder="Enter search term" value={searchTerm} onChange={onChange} />
+          </div>
 
-    return (
-      <div className="py-5 bg-light shadow-sm">
-        <div className="container">
-          <form onSubmit={this.onSubmit} className="row">
-            <div className="col-12 col-md-8">
-              <input type="text" className="form-control form-control-lg" name="search_term" placeholder="Enter search term" value={search_term} onChange={this.onChange} />
-            </div>
-
-            <div className="col-12 col-md-4 mt-4 mt-md-0">
-              <div className="d-flex align-items-center">
-                {showClearBtn && (
-                  <Fragment>
-                    <button className="btn btn-lg btn-success btn-block" style={{ borderTopRightRadius: '0', borderBottomRightRadius: '0' }} disabled={is_searching}>
-                      {is_searching && <i className="fa fa-circle-o-notch fa-spin fa-fw d-inline-block mr-2"></i>}
-                      <span>{is_searching ? 'Searching' : 'Search'}</span>
-                    </button>
-
-                    <a href="#" className="m-0 btn btn-lg btn-secondary btn-block" onClick={clearUsers} style={{ borderTopLeftRadius: '0', borderBottomLeftRadius: '0' }}>Clear</a>
-                  </Fragment>
-                )}
-
-                {!showClearBtn && (
-                  <button className="btn btn-lg btn-success btn-block" style={{ borderTopRightRadius: '.3rem', borderBottomRightRadius: '.3rem' }} disabled={is_searching}>
-                    {is_searching && <i className="fa fa-circle-o-notch fa-spin fa-fw d-inline-block mr-2"></i>}
-                    <span>{is_searching ? 'Searching' : 'Search'}</span>
+          <div className="col-12 col-md-4 mt-4 mt-md-0">
+            <div className="d-flex align-items-center">
+              {showClearBtn && (
+                <Fragment>
+                  <button className="btn btn-lg btn-success btn-block" style={{ borderTopRightRadius: '0', borderBottomRightRadius: '0' }} disabled={isSearching}>
+                    {isSearching && <i className="fa fa-circle-o-notch fa-spin fa-fw d-inline-block mr-2"></i>}
+                    <span>{isSearching ? 'Searching' : 'Search'}</span>
                   </button>
-                )}
-              </div>
+
+                  <a href="#" className="m-0 btn btn-lg btn-secondary btn-block" onClick={clearUsers} style={{ borderTopLeftRadius: '0', borderBottomLeftRadius: '0' }}>Clear</a>
+                </Fragment>
+              )}
+
+              {!showClearBtn && (
+                <button className="btn btn-lg btn-success btn-block" style={{ borderTopRightRadius: '.3rem', borderBottomRightRadius: '.3rem' }} disabled={isSearching}>
+                  {isSearching && <i className="fa fa-circle-o-notch fa-spin fa-fw d-inline-block mr-2"></i>}
+                  <span>{isSearching ? 'Searching' : 'Search'}</span>
+                </button>
+              )}
             </div>
-          </form>
-        </div>
+          </div>
+        </form>
       </div>
-    );
-  }
+    </div>
+  );
 }
+
+Search.propTypes = {
+  searchUsers: PropTypes.func.isRequired,
+  clearUsers: PropTypes.func.isRequired,
+  showClearBtn: PropTypes.bool.isRequired,
+  setAlert: PropTypes.func.isRequired
+};
 
 export default Search;
