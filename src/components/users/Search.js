@@ -1,10 +1,12 @@
 import React, { Fragment, useState, useContext } from 'react';
-import PropTypes from 'prop-types';
 import GitHubContext from '../../context/github/GitHubContext';
+import AlertContext from '../../context/alert/AlertContext';
 
-const Search = ({ showAlert }) => {
+const Search = () => {
 	const gitHubContext = useContext(GitHubContext);
 	const { users, clearUsers } = gitHubContext;
+
+	const alertContext = useContext(AlertContext);
 
   const [searchTerm, setSearchTerm] = useState('');
   const [isSearching, setIsSearching] = useState(false);
@@ -17,7 +19,7 @@ const Search = ({ showAlert }) => {
     setIsSearching(true);
 
     if (searchTerm === '') {
-      showAlert('Please enter a search term', 'danger');
+      alertContext.setAlert('Please enter a search term', 'danger');
 
       setSearchTerm('');
       setIsSearching(false);
@@ -63,9 +65,5 @@ const Search = ({ showAlert }) => {
     </div>
   );
 }
-
-Search.propTypes = {
-  showAlert: PropTypes.func.isRequired
-};
 
 export default Search;
