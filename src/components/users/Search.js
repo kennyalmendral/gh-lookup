@@ -1,7 +1,10 @@
-import React, { Fragment, useState } from 'react';
+import React, { Fragment, useState, useContext } from 'react';
 import PropTypes from 'prop-types';
+import GitHubContext from '../../context/github/GitHubContext';
 
-const Search = ({ searchUsers, clearUsers, showClearBtn, showAlert }) => {
+const Search = ({ clearUsers, showClearBtn, showAlert }) => {
+	const gitHubContext = useContext(GitHubContext);
+
   const [searchTerm, setSearchTerm] = useState('');
   const [isSearching, setIsSearching] = useState(false);
 
@@ -18,7 +21,7 @@ const Search = ({ searchUsers, clearUsers, showClearBtn, showAlert }) => {
       setSearchTerm('');
       setIsSearching(false);
     } else {
-      searchUsers(searchTerm).finally(() => {
+      gitHubContext.searchUsers(searchTerm).finally(() => {
         setSearchTerm('');
         setIsSearching(false);
       });
@@ -61,7 +64,6 @@ const Search = ({ searchUsers, clearUsers, showClearBtn, showAlert }) => {
 }
 
 Search.propTypes = {
-  searchUsers: PropTypes.func.isRequired,
   clearUsers: PropTypes.func.isRequired,
   showClearBtn: PropTypes.bool.isRequired,
   showAlert: PropTypes.func.isRequired
