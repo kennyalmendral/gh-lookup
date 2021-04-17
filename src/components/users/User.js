@@ -1,10 +1,14 @@
-import React, { useEffect } from 'react';
+import React, { useEffect, useContext } from 'react';
 import Spinner from '../layout/Spinner';
 import PropTypes from 'prop-types';
 import Repos from '../repos/Repos'
 import { Link } from 'react-router-dom';
+import GitHubContext from '../../context/github/GitHubContext';
 
-const User = ({ loading, user, repos, getUser, getUserRepos, match }) => {
+const User = ({ repos, getUserRepos, match }) => {
+	const gitHubContext = useContext(GitHubContext);
+	const { loading, user, getUser } = gitHubContext;
+
   useEffect(() => {
     getUser(match.params.login);
     getUserRepos(match.params.login);
@@ -32,7 +36,7 @@ const User = ({ loading, user, repos, getUser, getUserRepos, match }) => {
   return (
     <div className="container py-4">
       <div className="mb-4">
-        <Link to="/" className="btn btn-secondary btn-sm"><i className="fa fa-angle-double-left" /> Back to search</Link>
+        <Link to="/" className="btn btn-secondary btn-sm"><i className="fa fa-angle-double-left" /> Back to home</Link>
       </div>
 
       <div className="row">
@@ -92,10 +96,7 @@ const User = ({ loading, user, repos, getUser, getUserRepos, match }) => {
 }
 
 User.propTypes = {
-  loading: PropTypes.bool,
-  user: PropTypes.object.isRequired,
   repos: PropTypes.array.isRequired,
-  getUser: PropTypes.func.isRequired,
   getUserRepos: PropTypes.func.isRequired
 }
 

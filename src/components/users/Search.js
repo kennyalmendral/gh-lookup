@@ -2,8 +2,9 @@ import React, { Fragment, useState, useContext } from 'react';
 import PropTypes from 'prop-types';
 import GitHubContext from '../../context/github/GitHubContext';
 
-const Search = ({ clearUsers, showClearBtn, showAlert }) => {
+const Search = ({ showAlert }) => {
 	const gitHubContext = useContext(GitHubContext);
+	const { users, clearUsers } = gitHubContext;
 
   const [searchTerm, setSearchTerm] = useState('');
   const [isSearching, setIsSearching] = useState(false);
@@ -38,7 +39,7 @@ const Search = ({ clearUsers, showClearBtn, showAlert }) => {
 
           <div className="col-12 col-md-4 mt-4 mt-md-0">
             <div className="d-flex align-items-center">
-              {showClearBtn && (
+              {users.length > 0 && (
                 <Fragment>
                   <button className="btn btn-lg btn-success btn-block" style={{ borderTopRightRadius: '0', borderBottomRightRadius: '0' }} disabled={isSearching}>
                     {isSearching && <i className="fa fa-circle-o-notch fa-spin fa-fw d-inline-block mr-2"></i>}
@@ -49,7 +50,7 @@ const Search = ({ clearUsers, showClearBtn, showAlert }) => {
                 </Fragment>
               )}
 
-              {!showClearBtn && (
+              {users.length === 0 && (
                 <button className="btn btn-lg btn-success btn-block" style={{ borderTopRightRadius: '.3rem', borderBottomRightRadius: '.3rem' }} disabled={isSearching}>
                   {isSearching && <i className="fa fa-circle-o-notch fa-spin fa-fw d-inline-block mr-2"></i>}
                   <span>{isSearching ? 'Searching' : 'Search'}</span>
@@ -64,8 +65,6 @@ const Search = ({ clearUsers, showClearBtn, showAlert }) => {
 }
 
 Search.propTypes = {
-  clearUsers: PropTypes.func.isRequired,
-  showClearBtn: PropTypes.bool.isRequired,
   showAlert: PropTypes.func.isRequired
 };
 
