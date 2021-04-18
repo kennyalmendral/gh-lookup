@@ -95,9 +95,7 @@ const GitHubState = props => {
     }
   }
 
-  const clearUsers = (e) => {
-    e.preventDefault();
-
+  const clearUsers = () => {
 		dispatch({ type: CLEAR_USERS });
 		// TODO: dispatch({ type: CLEAR_USER });
 		// TODO: dispatch({ type: CLEAR_REPOS });
