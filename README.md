@@ -1,4 +1,4 @@
-# GitHub Lookup
+# GH Lookup
 
 Just another way to look up GitHub users easily.
 
