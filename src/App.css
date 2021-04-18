@@ -81,7 +81,8 @@
 	}
 
 	#search,
-	#about {
+	#about,
+	#page-not-found {
 		padding-top: 1rem !important;
 		padding-bottom: 1rem !important;
 	}
