@@ -5,7 +5,7 @@ const About = () => {
 		<div id="about" className="container py-5 d-flex justify-content-center">
 			<div className="card shadow-sm">
 				<div className="card-header">
-					<h3 className="mb-0">About GitHub Lookup</h3>
+					<h3 className="mb-0">About GH Lookup</h3>
 				</div>
 
 				<div className="card-body">
