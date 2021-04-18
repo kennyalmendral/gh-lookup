@@ -6,6 +6,17 @@ import GitHubReducer from './GitHubReducer';
 
 import { SEARCH_USERS, SET_LOADING, CLEAR_USERS, GET_USERS, GET_USER, GET_REPOS } from '../types';
 
+let gitHubClientId;
+let gitHubClientSecret;
+
+if (process.env.NODE_ENV !== 'production') {
+	gitHubClientId = process.env.REACT_APP_GITHUB_CLIENT_ID;
+	gitHubClientSecret = process.env.REACT_APP_GITHUB_CLIENT_SECRET;
+} else {
+	gitHubClientId = process.env.GITHUB_CLIENT_ID;
+	gitHubClientSecret = process.env.GITHUB_CLIENT_SECRET;
+}
+
 const GitHubState = props => {
 	const initialState = {
 		users: [],
@@ -20,7 +31,7 @@ const GitHubState = props => {
     setLoading(true);
 
     try {
-      const res = await axios.get(`https://api.github.com/search/users?q=${searchTerm}&client_id=${process.env.REACT_APP_GITHUB_CLIENT_ID}&client_secret=${process.env.REACT_APP_GITHUB_CLIENT_SECRET}`);
+      const res = await axios.get(`https://api.github.com/search/users?q=${searchTerm}&client_id=${gitHubClientId}&client_secret=${gitHubClientSecret}`);
 
 			dispatch({
 				type: SEARCH_USERS,
@@ -37,7 +48,7 @@ const GitHubState = props => {
 		setLoading(true);
 
     try {
-      const res = await axios.get(`https://api.github.com/users?client_id=${process.env.REACT_APP_GITHUB_CLIENT_ID}&client_secret=${process.env.REACT_APP_GITHUB_CLIENT_SECRET}`);
+      const res = await axios.get(`https://api.github.com/users?client_id=${gitHubClientId}&client_secret=${gitHubClientSecret}`);
 
 			dispatch({
 				type: GET_USERS,
@@ -54,7 +65,7 @@ const GitHubState = props => {
     setLoading(true);
 
     try {
-      const res = await axios.get(`https://api.github.com/users/${username}?client_id=${process.env.REACT_APP_GITHUB_CLIENT_ID}&client_secret=${process.env.REACT_APP_GITHUB_CLIENT_SECRET}`);
+      const res = await axios.get(`https://api.github.com/users/${username}?client_id=${gitHubClientId}&client_secret=${gitHubClientSecret}`);
 
 			dispatch({
 				type: GET_USER,
@@ -71,7 +82,7 @@ const GitHubState = props => {
     setLoading(true);
 
     try {
-      const res = await axios.get(`https://api.github.com/users/${username}/repos?sort=created:desc&client_id=${process.env.REACT_APP_GITHUB_CLIENT_ID}&client_secret=${process.env.REACT_APP_GITHUB_CLIENT_SECRET}`);
+      const res = await axios.get(`https://api.github.com/users/${username}/repos?sort=created:desc&client_id=${gitHubClientId}&client_secret=${gitHubClientSecret}`);
 
       dispatch({
 				type: GET_REPOS,
