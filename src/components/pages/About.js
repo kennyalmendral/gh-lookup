@@ -2,10 +2,10 @@ import React from 'react';
 
 const About = () => {
   return (
-		<div className="container py-5 d-flex justify-content-center">
+		<div id="about" className="container py-5 d-flex justify-content-center">
 			<div className="card shadow-sm">
 				<div className="card-header">
-					<h3 class="mb-0">About GitHub Lookup</h3>
+					<h3 className="mb-0">About GitHub Lookup</h3>
 				</div>
 
 				<div className="card-body">

@@ -1,4 +1,7 @@
-import React, { Fragment, useState, useContext } from 'react';
+import React, { Fragment, useState, useEffect, useContext } from 'react';
+
+import Alert from '../layout/Alert';
+
 import GitHubContext from '../../context/github/GitHubContext';
 import AlertContext from '../../context/alert/AlertContext';
 
@@ -7,9 +10,16 @@ const Search = () => {
 	const { users, clearUsers } = gitHubContext;
 
 	const alertContext = useContext(AlertContext);
+	const { setAlert, removeAlert } = alertContext;
 
   const [searchTerm, setSearchTerm] = useState('');
   const [isSearching, setIsSearching] = useState(false);
+  const [hasError, setHasError] = useState(false);
+
+	useEffect(() => {
+		removeAlert();
+		// eslint-disable-next-line
+	}, []);
 
   const onChange = e => setSearchTerm(e.target.value);
 
@@ -19,12 +29,16 @@ const Search = () => {
     setIsSearching(true);
 
     if (searchTerm === '') {
-      alertContext.setAlert('Please enter a search term', 'danger');
+      setAlert('Please enter a search term', 'danger');
 
+			setHasError(true);
       setSearchTerm('');
       setIsSearching(false);
     } else {
       gitHubContext.searchUsers(searchTerm).finally(() => {
+      	removeAlert();
+
+				setHasError(false);
         setSearchTerm('');
         setIsSearching(false);
       });
@@ -32,14 +46,16 @@ const Search = () => {
   }
 
   return (
-    <div className="py-5 bg-light shadow-sm">
+    <div id="search" className="py-5 bg-light shadow-sm">
       <div className="container">
         <form onSubmit={onSubmit} className="row">
           <div className="col-12 col-md-8">
-            <input type="text" className="form-control form-control-lg" placeholder="Enter search term" value={searchTerm} onChange={onChange} />
+            <input type="text" className={hasError ? 'is-invalid form-control form-control-lg' : 'form-control form-control-lg'} placeholder="Enter search term" value={searchTerm} onChange={onChange} />
+
+    				<Alert />
           </div>
 
-          <div className="col-12 col-md-4 mt-4 mt-md-0">
+          <div id="buttons" className="col-12 col-md-4 mt-4 mt-md-0">
             <div className="d-flex align-items-center">
               {users.length > 0 && (
                 <Fragment>

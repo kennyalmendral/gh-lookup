@@ -1,7 +1,8 @@
 import React, { useEffect, useContext } from 'react';
+import { Link } from 'react-router-dom';
+
 import Spinner from '../layout/Spinner';
 import Repos from '../repos/Repos'
-import { Link } from 'react-router-dom';
 import GitHubContext from '../../context/github/GitHubContext';
 
 const User = ({ match }) => {
@@ -12,34 +13,20 @@ const User = ({ match }) => {
     getUser(match.params.login);
     getUserRepos(match.params.login);
     // eslint-disable-next-line
-  }, []); // In order to mimick the behavior of componentDidMount, pass a empty array [] as the second argument
+  }, []);
 
-  const {
-    name,
-    avatar_url,
-    location,
-    bio,
-    blog,
-    company,
-    login,
-    html_url,
-    followers,
-    following,
-    public_repos,
-    public_gists,
-    hireable
-  } = user;
+  const { name, avatar_url, location, bio, blog, company, login, html_url, followers, following, public_repos, public_gists } = user;
 
   if (loading) return <Spinner />
 
   return (
-    <div className="container py-4">
+    <div id="user" className="container py-4">
       <div className="mb-4">
         <Link to="/" className="btn btn-secondary btn-sm"><i className="fa fa-angle-double-left" /> Back to home</Link>
       </div>
 
       <div className="row">
-        <div className="col-3">
+        <div className="col-12 mb-4 col-lg-3 mb-lg-0">
           <div className="card shadow-sm">
             <div className="card-body d-flex flex-column align-items-center justify-content-center">
               <img src={avatar_url} alt={name} width="80%" className="rounded-circle img-fluid my-4" />
@@ -57,7 +44,7 @@ const User = ({ match }) => {
           </div>
         </div>
 
-        <div className="col-9">
+        <div className="col-12 col-lg-9">
           <div className="card shadow-sm">
             <div className="card-header">
               <h3 className="card-title">{name} ({login})</h3>

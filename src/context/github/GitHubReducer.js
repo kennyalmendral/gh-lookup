@@ -1,17 +1,11 @@
-import {
-	SEARCH_USERS,
-	SET_LOADING,
-	CLEAR_USERS,
-	GET_USER,
-	GET_REPOS
-} from '../types';
+import { SEARCH_USERS, SET_LOADING, CLEAR_USERS, GET_USERS, GET_USER, GET_REPOS } from '../types';
 
 const GitHubReducer = (state, action) => {
 	switch (action.type) {
 		case SET_LOADING:
 			return {
-				...state, // state is immutable, it can't be reassigned, so it must be copied first using the spread operator which will copy whatever is in the current state or in short, "spread the current state"
-				loading: action.payload // Now the copied state can be mutated
+				...state,
+				loading: action.payload
 			};
 		case SEARCH_USERS:
 			return {
@@ -22,6 +16,11 @@ const GitHubReducer = (state, action) => {
 			return {
 				...state,
 				users: []
+			};
+		case GET_USERS:
+			return {
+				...state,
+				users: action.payload
 			};
 		case GET_USER:
 			return {

@@ -1,0 +1,108 @@
+.card-body p:last-of-type {
+	margin-bottom: 0 !important;
+}
+
+#repos .card:last-of-type {
+	margin-bottom: 0 !important;
+}
+
+#repos .repo .card-header div:first-of-type {
+	flex: 0 0 50%;
+}
+
+#repos .repo .card-header div:last-of-type {
+	flex: 0 0 50%;
+}
+
+@media (max-width: 1200px) {
+	#repos .repo .card-header {
+		flex-direction: column;
+		align-items: flex-start !important;
+	}
+
+	#repos .repo .card-header div:first-of-type {
+		flex: 0 0 100%;
+		width: 100%;
+		padding-right: 0 !important;
+	}
+
+	#repos .repo .card-header div:last-of-type {
+		flex: 0 0 100%;
+		width: 100%;
+		padding-right: 0 !important;
+		padding-top: 8px;
+		justify-content: flex-start !important;
+	}
+
+	#repos .repo .card-header div:last-of-type p {
+		text-align: left !important;
+	}
+}
+
+@media (max-width: 576px) {
+	#users {
+		margin: 1rem 0 !important;
+	}
+
+	#users > .row > div {
+		margin-bottom: 1rem !important;
+	}
+
+	#users > .row > div:last-of-type {
+		margin-bottom: 0 !important;
+	}
+}
+
+@media (max-width: 500px) {
+	#repos .repo .card-header div:last-of-type {
+		padding-top: 8px;
+		flex-direction: column !important;
+	}
+
+	#repos .repo .card-header div:last-of-type p {
+		text-align: left !important;
+	}
+
+	#repos .repo .card-header div:last-of-type p:last-of-type {
+		border-left: 0 !important;
+		padding-left: 0 !important;
+		margin-left: 0 !important;
+	}
+}
+
+@media (max-width: 400px) {
+	.navbar {
+		padding-top: 1rem;
+		padding-bottom: 0.5rem;
+	}
+
+	.navbar > .container {
+		flex-direction: column !important;
+	}
+
+	#search,
+	#about {
+		padding-top: 1rem !important;
+		padding-bottom: 1rem !important;
+	}
+
+	#search #buttons {
+		margin-top: 1rem !important;
+	}
+
+	#search #buttons > div {
+		flex-direction: column;
+	}
+
+	#search input,
+	#search #buttons button,
+	#search #buttons a {
+		padding: 0.375rem 0.75rem !important;
+		font-size: 1rem !important;
+		border-radius: 0.25rem !important;
+	}
+
+	#search #buttons a {
+		margin-top: 1rem !important;
+	}
+}

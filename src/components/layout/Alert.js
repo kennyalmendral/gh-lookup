@@ -1,4 +1,5 @@
 import React, { useContext } from 'react';
+
 import AlertContext from '../../context/alert/AlertContext';
 
 const Alert = () => {
@@ -6,12 +7,8 @@ const Alert = () => {
 	const { alert } = alertContext;
 
   return (
-    <div className="container mt-4">
-      {(alert !== null && alert.type === 'danger') && (
-        <div className={`alert alert-${alert.type} alert-dismissible fade show`}>
-          <i className="fa fa-exclamation-triangle pr-2"></i> {alert.msg}
-        </div>
-      )}
+    <div>
+      {(alert !== null && alert.type === 'danger') && <p className="invalid-feedback d-block pt-1 mb-0"><strong>{alert.msg}</strong></p>}
     </div>
   )
 }
