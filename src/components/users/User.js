@@ -40,7 +40,7 @@ const User = ({ match }) => {
 
       <div className="row">
         <div className="col-3">
-          <div className="card">
+          <div className="card shadow-sm">
             <div className="card-body d-flex flex-column align-items-center justify-content-center">
               <img src={avatar_url} alt={name} width="80%" className="rounded-circle img-fluid my-4" />
 
@@ -58,15 +58,13 @@ const User = ({ match }) => {
         </div>
 
         <div className="col-9">
-          <div className="card">
+          <div className="card shadow-sm">
             <div className="card-header">
-              <h1 className="card-title">{name} ({login})</h1>
+              <h3 className="card-title">{name} ({login})</h3>
             </div>
 
             <div className="card-body">
-              {hireable ? <p className="text-success fw-bold">Available for hire</p> : <p className="text-danger fw-bold">Not available for hire</p>}
-
-              {bio && <p>{bio}</p>}
+              {bio ? <p>{bio}</p> : <p>No bio specified.</p>}
               {company && <p>Works at {company}</p>}
               {blog && <p><a href={blog} target="_blank" rel="noreferrer">{blog}</a></p>}
             </div>
@@ -79,9 +77,9 @@ const User = ({ match }) => {
             </div>
           </div>
 
-          <div className="card mt-4">
+          <div className="card shadow-sm mt-4">
             <div className="card-header">
-              <h2>Repositories</h2>
+              <h3>Repositories</h3>
             </div>
 
             <div className="card-body">
