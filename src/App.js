@@ -15,22 +15,22 @@ import './App.css';
 
 const App = () => {
   return (
-		<GitHubState>
-			<AlertState>
-		    <Router>
-		      <div className="App">
-		        <Navbar />
-						
-		        <Switch>
-		          <Route exact path="/" component={Home} />
-		          <Route exact path="/about" component={About} />
-		          <Route exact path="/user/:login" component={User} />
-		          <Route component={NotFound} />
-		        </Switch>
-		      </div>
-		    </Router>
-			</AlertState>
-		</GitHubState>
+    <GitHubState>
+      <AlertState>
+        <Router>
+          <div className="App">
+            <Navbar />
+            
+            <Switch>
+              <Route exact path="/" component={Home} />
+              <Route exact path="/about" component={About} />
+              <Route exact path="/user/:login" component={User} />
+              <Route component={NotFound} />
+            </Switch>
+          </div>
+        </Router>
+      </AlertState>
+    </GitHubState>
   );
 }
 

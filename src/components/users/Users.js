@@ -5,11 +5,11 @@ import Spinner from '../layout/Spinner';
 import GitHubContext from '../../context/github/GitHubContext';
 
 const Users = () => {
-	const gitHubContext = useContext(GitHubContext);
-	const { loading, users, getUsers } = gitHubContext;
+  const gitHubContext = useContext(GitHubContext);
+  const { loading, users, getUsers } = gitHubContext;
 
   useEffect(() => {
-		getUsers();
+    getUsers();
     // eslint-disable-next-line
   }, []);
 
@@ -24,7 +24,7 @@ const Users = () => {
           )}
         </div>
 
-				{/* TODO: Pagination */}
+        {/* TODO: Pagination */}
       </div>
     );
   }

@@ -10,22 +10,22 @@ let gitHubClientId;
 let gitHubClientSecret;
 
 if (process.env.NODE_ENV !== 'production') {
-	gitHubClientId = process.env.REACT_APP_GITHUB_CLIENT_ID;
-	gitHubClientSecret = process.env.REACT_APP_GITHUB_CLIENT_SECRET;
+  gitHubClientId = process.env.REACT_APP_GITHUB_CLIENT_ID;
+  gitHubClientSecret = process.env.REACT_APP_GITHUB_CLIENT_SECRET;
 } else {
-	gitHubClientId = process.env.GITHUB_CLIENT_ID;
-	gitHubClientSecret = process.env.GITHUB_CLIENT_SECRET;
+  gitHubClientId = process.env.GITHUB_CLIENT_ID;
+  gitHubClientSecret = process.env.GITHUB_CLIENT_SECRET;
 }
 
 const GitHubState = props => {
-	const initialState = {
-		users: [],
-		user: {},
-		repos: [],
-		loading: false
-	};
+  const initialState = {
+    users: [],
+    user: {},
+    repos: [],
+    loading: false
+  };
 
-	const [state, dispatch] = useReducer(GitHubReducer, initialState);
+  const [state, dispatch] = useReducer(GitHubReducer, initialState);
 
   const searchUsers = async searchTerm => {
     setLoading(true);
@@ -33,33 +33,33 @@ const GitHubState = props => {
     try {
       const res = await axios.get(`https://api.github.com/search/users?q=${searchTerm}&client_id=${gitHubClientId}&client_secret=${gitHubClientSecret}`);
 
-			dispatch({
-				type: SEARCH_USERS,
-				payload: res.data.items
-			});
+      dispatch({
+        type: SEARCH_USERS,
+        payload: res.data.items
+      });
     } catch (e) {
       console.log(e.response.data.message);
     } finally {
-    	setLoading(false);
+      setLoading(false);
     }
   }
 
   const getUsers = async () => {
-		setLoading(true);
+    setLoading(true);
 
     try {
       const res = await axios.get(`https://api.github.com/users?client_id=${gitHubClientId}&client_secret=${gitHubClientSecret}`);
 
-			dispatch({
-				type: GET_USERS,
-				payload: res.data
-			});
+      dispatch({
+        type: GET_USERS,
+        payload: res.data
+      });
     } catch (e) {
       console.log(e.response.data.message);
     } finally {
-    	setLoading(false);
+      setLoading(false);
     }
-	}
+  }
 
   const getUser = async username => {
     setLoading(true);
@@ -67,10 +67,10 @@ const GitHubState = props => {
     try {
       const res = await axios.get(`https://api.github.com/users/${username}?client_id=${gitHubClientId}&client_secret=${gitHubClientSecret}`);
 
-			dispatch({
-				type: GET_USER,
-				payload: res.data
-			});
+      dispatch({
+        type: GET_USER,
+        payload: res.data
+      });
     } catch (e) {
       console.log(e.response.data.message);
     } finally {
@@ -85,9 +85,9 @@ const GitHubState = props => {
       const res = await axios.get(`https://api.github.com/users/${username}/repos?sort=created:desc&client_id=${gitHubClientId}&client_secret=${gitHubClientSecret}`);
 
       dispatch({
-				type: GET_REPOS,
-				payload: res.data
-			});
+        type: GET_REPOS,
+        payload: res.data
+      });
     } catch (e) {
       console.log(e.response.data.message);
     } finally {
@@ -96,34 +96,34 @@ const GitHubState = props => {
   }
 
   const clearUsers = () => {
-		dispatch({ type: CLEAR_USERS });
-		// TODO: dispatch({ type: CLEAR_USER });
-		// TODO: dispatch({ type: CLEAR_REPOS });
+    dispatch({ type: CLEAR_USERS });
+    // TODO: dispatch({ type: CLEAR_USER });
+    // TODO: dispatch({ type: CLEAR_REPOS });
 
     setLoading(false);
   }
 
-	const setLoading = value => dispatch({
-		type: SET_LOADING,
-		payload: value
-	});
+  const setLoading = value => dispatch({
+    type: SET_LOADING,
+    payload: value
+  });
 
-	return (
-		<GitHubContext.Provider
-			value={{
-				users: state.users,
-				user: state.user,
-				repos: state.repos,
-				loading: state.loading,
-				searchUsers,
-				clearUsers,
-				getUsers,
-				getUser,
-				getUserRepos
-			}}>
-			{props.children}
-		</GitHubContext.Provider>
-	);
+  return (
+    <GitHubContext.Provider
+      value={{
+        users: state.users,
+        user: state.user,
+        repos: state.repos,
+        loading: state.loading,
+        searchUsers,
+        clearUsers,
+        getUsers,
+        getUser,
+        getUserRepos
+      }}>
+      {props.children}
+    </GitHubContext.Provider>
+  );
 }
 
 export default GitHubState;

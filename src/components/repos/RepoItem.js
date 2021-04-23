@@ -4,12 +4,12 @@ import { formatDistance, subDays } from 'date-fns';
 
 const RepoItem = ({ repo }) => {
   const {
-		name,
-		description,
-		html_url,
-		license,
-		updated_at
-	} = repo;
+    name,
+    description,
+    html_url,
+    license,
+    updated_at
+  } = repo;
 
   return (
     <div className="card repo mb-3">
@@ -34,4 +34,4 @@ RepoItem.propTypes = {
   repo: PropTypes.object.isRequired
 }
 
-export default RepoItem
+export default RepoItem;
