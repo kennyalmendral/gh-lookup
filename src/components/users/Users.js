@@ -24,7 +24,7 @@ const Users = () => {
           )}
         </div>
 
-        {/* TODO: Pagination */}
+        {/* TODO: Learn more */}
       </div>
     );
   }

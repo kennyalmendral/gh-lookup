@@ -1,12 +1,12 @@
 import React from 'react';
-import PropTypes from 'prop-types';
 import { Link } from 'react-router-dom';
+import PropTypes from 'prop-types';
 
-const Navbar = ({ icon, title }) => {
+const Navbar = ({ title }) => {
   return (
     <nav className="navbar navbar-dark bg-dark">
       <div className="container">
-        <h1 className="text-white"><i className={icon}></i> {title}</h1>
+        <h1 className="text-white"><img src={`${process.env.PUBLIC_URL}/logo.png`} alt={title} style={{ width: '40px' }} /> <span>{title}</span></h1>
         
         <ul className="navbar-nav flex-row">
           <li className="mr-4"><Link to="/" className="nav-link">Home</Link></li>
@@ -18,13 +18,11 @@ const Navbar = ({ icon, title }) => {
 }
 
 Navbar.defaultProps = {
-  title: 'GH Lookup',
-  icon: 'fa fa-search'
+  title: 'GH Lookup'
 };
 
 Navbar.propTypes = {
-  title: PropTypes.string.isRequired,
-  icon: PropTypes.string.isRequired
+  title: PropTypes.string.isRequired
 };
 
 export default Navbar;

@@ -13,7 +13,7 @@ const About = () => {
         </div>
 
         <div className="card-footer">
-          <p className="m-0 text-muted"><strong>Version:</strong> 1.0.0</p>
+          <p className="m-0 text-muted"><strong>Version:</strong> 1.0.1</p>
         </div>
       </div>
     </div>
