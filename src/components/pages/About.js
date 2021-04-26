@@ -13,7 +13,7 @@ const About = () => {
         </div>
 
         <div className="card-footer">
-          <p className="m-0 text-muted"><strong>Version:</strong> 1.0.1</p>
+          <p className="m-0 text-muted"><i className="fa fa-github"></i> <strong>Version: 1.0.1</strong> by <a href="https://github.com/kennyalmendral/gh-lookup" target="_blank" rel="noreferrer">Kenny Almendral</a></p>
         </div>
       </div>
     </div>
