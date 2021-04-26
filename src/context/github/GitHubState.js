@@ -4,7 +4,7 @@ import axios from 'axios';
 import GitHubContext from './GitHubContext';
 import GitHubReducer from './GitHubReducer';
 
-import { SEARCH_USERS, SET_LOADING, CLEAR_USERS, GET_USERS, GET_USER, GET_REPOS } from '../types';
+import { SEARCH_USERS, SET_LOADING, CLEAR_USERS, CLEAR_USER, CLEAR_REPOS, GET_USERS, GET_USER, GET_REPOS } from '../types';
 
 let gitHubClientId;
 let gitHubClientSecret;
@@ -97,8 +97,8 @@ const GitHubState = props => {
 
   const clearUsers = () => {
     dispatch({ type: CLEAR_USERS });
-    // TODO: dispatch({ type: CLEAR_USER });
-    // TODO: dispatch({ type: CLEAR_REPOS });
+    dispatch({ type: CLEAR_USER });
+    dispatch({ type: CLEAR_REPOS });
 
     setLoading(false);
   }

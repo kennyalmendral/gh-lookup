@@ -1,4 +1,4 @@
-import { SEARCH_USERS, SET_LOADING, CLEAR_USERS, GET_USERS, GET_USER, GET_REPOS } from '../types';
+import { SEARCH_USERS, SET_LOADING, CLEAR_USERS, CLEAR_USER, CLEAR_REPOS, GET_USERS, GET_USER, GET_REPOS } from '../types';
 
 const GitHubReducer = (state, action) => {
   switch (action.type) {
@@ -16,6 +16,16 @@ const GitHubReducer = (state, action) => {
       return {
         ...state,
         users: []
+      };
+    case CLEAR_USER:
+      return {
+        ...state,
+        user: {}
+      };
+    case CLEAR_REPOS:
+      return {
+        ...state,
+        repos: []
       };
     case GET_USERS:
       return {

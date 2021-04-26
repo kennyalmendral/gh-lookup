@@ -6,9 +6,10 @@ import GitHubContext from '../../context/github/GitHubContext';
 
 const Users = () => {
   const gitHubContext = useContext(GitHubContext);
-  const { loading, users, getUsers } = gitHubContext;
+  const { loading, users, getUsers, clearUsers } = gitHubContext;
 
   useEffect(() => {
+    clearUsers();
     getUsers();
     // eslint-disable-next-line
   }, []);
@@ -23,8 +24,6 @@ const Users = () => {
             <UserItem key={user.id} user={user} />
           )}
         </div>
-
-        {/* TODO: Learn more */}
       </div>
     );
   }
